@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lab 5</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/table_changer.js" type="text/javascript"></script>
+    <script src="js/submit_table.js" type="text/javascript"></script>
+    <script src="js/file_loader.js" type="text/javascript"></script>
+    <script src="js/graph.js" type="text/javascript"></script>
+    <script src="js/function.js" type="text/javascript"></script>
+    <script src="js/config.js" type="text/javascript"></script>
+    <script src="js/util.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" charset="UTF-8"
+            src="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraphcore.js"></script>
+    <script type="text/javascript" charset="UTF-8"
+            src="js/input-switch.js"></script>
+    <script type="text/javascript" charset="UTF-8"
+            src="js/func_loader.js"></script>
+    <script type="text/javascript" charset="UTF-8"
+            src="js/result_builder.js"></script>
+    <script type="text/javascript" charset="UTF-8"
+            src="js/counter.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraph.css"/>
+</head>
+<body onload="initialize_table()">
+<h1>Input Form</h1>
+<h2>Rows - <span id="row_num" class="row_num"></span></h2>
+<div class="container">
+    <form>
+        <table>
+            <thead>
+            <tr>
+                <th class="first_line">X</th>
+                <th class="first_line">Y</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><input type="number" placeholder="Enter X" name="x1" step="any" required></td>
+                <td><input type="number" placeholder="Enter Y" name="y1" step="any" required></td>
+            </tr>
+            <tr>
+                <td><input type="number" placeholder="Enter X" name="x2" step="any" required></td>
+                <td><input type="number" placeholder="Enter Y" name="y2" step="any" required></td>
+            </tr>
+            <tr>
+                <td><input type="number" placeholder="Enter X" name="x3" step="any" required></td>
+                <td><input type="number" placeholder="Enter Y" name="y3" step="any" required></td>
+            </tr>
+            <tr>
+                <td><input type="number" placeholder="Enter X" name="x4" step="any" required></td>
+                <td><input type="number" placeholder="Enter Y" name="y4" step="any" required></td>
+            </tr>
+            <tr>
+                <td><input type="number" placeholder="Enter X" name="x5" step="any" required></td>
+                <td><input type="number" placeholder="Enter Y" name="y5" step="any" required></td>
+            </tr>
+            <tr id="row-6" style="display: none">
+                <td><input type="number" placeholder="Enter X" name="x6" step="any" required></td>
+                <td><input type="number" placeholder="Enter Y" name="y6" step="any" required></td>
+            </tr>
+            <tr id="row-7" style="display: none">
+                <td><input type="number" placeholder="Enter X" name="x7" step="any" required></td>
+                <td><input type="number" placeholder="Enter Y" name="y7" step="any" required></td>
+            </tr>
+            <tr id="row-8" style="display: none">
+                <td><input type="number" placeholder="Enter X" name="x8" step="any" required></td>
+                <td><input type="number" placeholder="Enter Y" name="y8" step="any" required></td>
+            </tr>
+            <tr id="row-9" style="display: none">
+                <td><input type="number" placeholder="Enter X" name="x9" step="any"></td>
+                <td><input type="number" placeholder="Enter Y" name="y9" step="any"></td>
+            </tr>
+            <tr id="row-10" style="display: none">
+                <td><input type="number" placeholder="Enter X" name="x10" step="any"></td>
+                <td><input type="number" placeholder="Enter Y" name="y10" step="any"></td>
+            </tr>
+            <tr id="row-11" style="display: none">
+                <td><input type="number" placeholder="Enter X" name="x11" step="any"></td>
+                <td><input type="number" placeholder="Enter Y" name="y11" step="any"></td>
+            </tr>
+            <tr id="row-12" style="display: none">
+                <td><input type="number" placeholder="Enter X" name="x12" step="any"></td>
+                <td><input type="number" placeholder="Enter Y" name="y12" step="any"></td>
+            </tr>
+            <tr>
+                <td>
+                    <button id="inc_btn" onclick="increment()" type="button" class="add-row"></button>
+                </td>
+                <td>
+                    <button id="dec_btn" onclick="decrement()" type="button" class="remove-row"></button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <br>
+        <button class="submit" type="button" onclick="submitForm(event)">Send</button>
+        <button type="button" class="load-button" onclick="loadFile()">Load File</button>
+        <br><br>
+        <button type="button" class="choose-button" onclick="chooseFunc()">Choose Function</button>
+
+    </form>
+
+    <div style="display: none; justify-content: center; padding-top: 40px; margin: 0 auto; max-width: 500px;"
+         id="function-input">
+        <input type="radio" name="toggle-option" id="sin-option" checked>
+        <label for="sin-option" class="radio-choose">SIN X</label>
+        <input type="radio" name="toggle-option" id="square-option">
+        <label for="square-option" class="radio-choose">X^2 + X</label>
+
+        <br><br>
+        <div>
+            <div class="row-choose">
+                <input type="number" id="input-a" style="width: 50%" placeholder="Enter A" min="-100" max="100"
+                       name="LEFT" step="any">
+                <input type="number" id="input-b" style="width: 50%" placeholder="Enter B" min="-100" max="100"
+                       name="RIGHT" step="any">
+            </div>
+            <div class="row-choose">
+                <input type="number" id="input-n" placeholder="Enter N" min="0" max="100" name="N" step="any">
+            </div>
+            <BR><BR>
+            <button type="button" class="load-button" onclick="loadFunc()">Load Function</button>
+            <br><br>
+        </div>
+
+
+    </div>
+    <br>
+    <div class="result">
+        <h1>Result:</h1>
+
+        <h2>Таблица конечных разностей:</h2>
+        <div id="tableContainer"></div>
+        <br><br>
+
+        <h2>Введите значение X для приблеженного подсчета:</h2>
+        <div style="display: none; justify-content: center; padding-top: 40px; margin: 0 auto; max-width: 500px;" id="x-input">
+            <div>
+                <div class="row-choose">
+                    <input type="number" class="x-button" id="input-X" placeholder="Enter X" name="X" step="any">
+                </div>
+                <BR><BR>
+                <button type="button" class="load-button" onclick="countX()">Count</button>
+                <br><br>
+                <div class="row-choose">
+                    <h2> Ответ полученный методом Ньютона:
+                        <span id="newton_result"></span>
+                    </h2>
+                </div>
+                <br><br>
+                <div class="row-choose">
+                    <h2> Ответ полученный методом Лагранжа:
+                        <span id="lagrange_result"></span>
+                    </h2>
+                </div>
+            </div>
+
+
+
+
+        </div>
+        <br><br>
+
+
+
+        <div id="jxgbox" class="jxgbox"></div>
+        <br>
+        <br>
+        <div id="jxgboxas" class="jxgbox"></div>
+        <br>
+
+    </div>
+</div>
+</body>
+</html>
